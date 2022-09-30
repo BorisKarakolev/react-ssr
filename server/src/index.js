@@ -12,11 +12,13 @@ app.get("*", (req, res) => {
   const store = createStore();
 
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {
-    return route.loadData ? route.loadData(store) : null;
+    return route.loadData ? route.loadData(store) : null; 
   });
 
   Promise.all(promises).then(() => {
     res.send(renderer(req, store));
+  }).catch(err => {
+    res.json({ err, msg: 'Something went wrong' })
   })
 });
 

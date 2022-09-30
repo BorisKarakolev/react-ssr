@@ -142,7 +142,7 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _axios2.default.get("https://react-ssr-api.heroku.com/users");
+              return _axios2.default.get("http://localhost:4200/users");
 
             case 2:
               res = _context.sent;
@@ -216,6 +216,8 @@ app.get("*", function (req, res) {
 
   Promise.all(promises).then(function () {
     res.send((0, _renderer2.default)(req, store));
+  }).catch(function (err) {
+    res.json({ err: err, msg: 'Something went wrong' });
   });
 });
 
