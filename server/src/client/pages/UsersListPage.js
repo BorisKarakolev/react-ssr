@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "../actions";
+import requireAuth from "../components/hocs/requireAuth";
 
 class UsersList extends Component {
   componentDidMount() {
@@ -15,8 +16,8 @@ class UsersList extends Component {
 
   render() {
     return (
-      <div>
-        Here's a big list of users:
+      <div className="container">
+        <h3>Here's a big list of users</h3>
         <ul>{this.renderUsers()}</ul>
       </div>
     );
@@ -33,5 +34,5 @@ function loadData(store) {
 
 export default {
   loadData,
-  component: connect(mapStateToProps, { fetchUsers })(UsersList)
-}
+  component: connect(mapStateToProps, { fetchUsers })(requireAuth(UsersList)),
+};
